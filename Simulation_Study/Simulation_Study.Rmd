@@ -1,0 +1,44 @@
+---
+title: "Simulation Study for `feature.selector()`"
+author: "Daniel Anadria, Ola Dacko"
+date: "2022-11-11"
+output: html_document
+---
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+
+
+This is a  simulation study exploring the benefits of using filter, wrapper and hybrid feature selection methods for multiple imputation. The best resulting algorithms will be implemented to R `mice` package in form of a new function called `feature.selector()`.
+
+The following algorithms are tested:
+
+
+```{r, echo = F, results = 'asis'}
+Method <- c("Filter", "Wrapper", "Hybrid")
+Algorithm <- c("ReliefF; Miminal Redundancy Maximal Relevance (mRMR)", 
+               "Genetic Algorithm (GA); Particle Swarm Optimization (PSO); Ant Colony Optimization (ACO)",
+               "ReliefF and mRMR with GA PSO, ACO")
+
+kableExtra::kable(tibble(Method, Algorithm), booktabs = T) %>%
+  kable_styling(position = "center")
+
+```
+
+
+The simulation study has the following design:
+
+```{r, echo = F}
+Outcome <- c("Binary", "Multiclass", "Continuous")
+Noise <- c(rep("Low, Medium, High",3))
+
+
+kableExtra::kable(tibble(Outcome, Noise), booktabs = T) %>%
+  kable_styling(position = "center")
+
+```
+
