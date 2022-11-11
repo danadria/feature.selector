@@ -1,8 +1,12 @@
 ---
 title: "Simulation Study for `feature.selector()`"
-author: "Daniel Anadria, Ola Dacko"
-date: "2022-11-11"
-output: html_document
+author:
+- Daniel Anadria
+- Ola Dacko
+output:
+  html_document:
+    df_print: paged
+    css: Simulation_Study.css
 ---
 
 ```{r, echo = F, warning = F, message = F}
