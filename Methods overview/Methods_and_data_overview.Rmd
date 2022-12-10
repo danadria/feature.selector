@@ -1,0 +1,358 @@
+---
+title: "Test Data and Methods overview for `feature.selector()`"
+author:
+- Daniel Anadria
+- Ola Dacko
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+## The summary of possible datasets with mixed data types 
+
+### 1. Automobile Data Set [link](https://archive.ics.uci.edu/ml/datasets/Automobile)
+
+#### Title: 1985 Auto Imports Database can be accessed via 
+
+##### Description
+      This data set consists of three types of entities: (a) the
+      specification of an auto in terms of various characteristics, (b)
+      its assigned insurance risk rating, (c) its normalized losses in use
+      as compared to other cars.  The second rating corresponds to the
+      degree to which the auto is more risky than its price indicates.
+      Cars are initially assigned a risk factor symbol associated with its
+      price.   Then, if it is more risky (or less), this symbol is
+      adjusted by moving it up (or down) the scale.  Actuarians call this
+      process "symboling".  A value of +3 indicates that the auto is
+      risky, -3 that it is probably pretty safe.
+
+      The third factor is the relative average loss payment per insured
+      vehicle year.  This value is normalized for all autos within a
+      particular size classification (two-door small, station wagons,
+      sports/speciality, etc...), and represents the average loss per car
+      per year.
+
+##### Number of Instances: 205
+
+##### Number of Attributes: 26 total
+  * 15 continuous
+  * 1 integer
+  * 10 nominal
+
+##### Attribute Information:     
+  Nr   Attribute:                Attribute Range:
+  ---- ------------------        -----------------------------------------------
+  1.    symboling:                -3, -2, -1, 0, 1, 2, 3.
+  2.    normalized-losses:        continuous from 65 to 256.
+  3.    make                      alfa-romero, audi, bmw, chevrolet, dodge, honda,
+  3.    make                      isuzu, jaguar, mazda, mercedes-benz, mercury,
+  3.    make                      mitsubishi, nissan, peugot, plymouth, porsche,
+  3.    make                      renault, saab, subaru, toyota, volkswagen, volvo
+  4.    fuel-type:                diesel, gas.
+  5.    aspiration:               std, turbo.
+  6.    num-of-doors:             four, two.
+  7.    body-style:               hardtop, wagon, sedan, hatchback, convertible.
+  8.    drive-wheels:             4wd, fwd, rwd.
+  9.    engine-location:          front, rear.
+   10.    wheel-base:               continuous from 86.6 120.9.
+   11.    length:                   continuous from 141.1 to 208.1.
+   12.    width:                    continuous from 60.3 to 72.3.
+   13.    height:                   continuous from 47.8 to 59.8.
+   14.    curb-weight:              continuous from 1488 to 4066.
+   15.    engine-type:              dohc, dohcv, l, ohc, ohcf, ohcv, rotor.
+   16.    num-of-cylinders:         eight, five, four, six, three, twelve, two.
+   17.    engine-size:              continuous from 61 to 326.
+   18.    fuel-system:              1bbl, 2bbl, 4bbl, idi, mfi, mpfi, spdi, spfi.
+   19.    bore:                     continuous from 2.54 to 3.94.
+   20.    stroke:                   continuous from 2.07 to 4.17.
+   21.    compression-ratio:        continuous from 7 to 23.
+   22.    horsepower:               continuous from 48 to 288.
+   23.    peak-rpm:                 continuous from 4150 to 6600.
+   24.    city-mpg:                 continuous from 13 to 49.
+   25.    highway-mpg:              continuous from 16 to 54.
+   26.    price:                    continuous from 5118 to 45400.
+
+##### 7 features include missing values
+
+### 2. Insurance Company Benchmark (COIL 2000) Data Set [link](https://archive.ics.uci.edu/ml/datasets/Insurance+Company+Benchmark+%28COIL+2000%29)
+
+#### Title: Insurance Company Benchmark (COIL 2000) Data Set
+
+Information about customers consists of 86 variables and includes product usage data and socio-demographic data derived from zip area codes. The data was supplied by the Dutch data mining company Sentient Machine Research and is based on a real world business problem. The training set contains over 5000 descriptions of customers, including the information of whether or not they have a caravan insurance policy. A test set contains 4000 customers of whom only the organisers know if they have a caravan insurance policy.
+
+The data dictionary describes the variables used and their values.
+
+Note: All the variables starting with M are zipcode variables. They give information on the distribution of that variable, e.g. Rented house, in the zipcode area of the customer.
+
+One instance per line with tab delimited fields.
+RELEVANT FILES
+
+TICDATA2000.txt: 
+Dataset to train and validate prediction models and build a description (5822 customer records). Each record consists of 86 attributes, containing sociodemographic data (attribute 1-43) and product ownership (attributes 44-86).The sociodemographic data is derived from zip codes. All customers living in areas with the same zip code have the same sociodemographic attributes.  Attribute 86, "CARAVAN:Number of mobile home policies", is the target variable. 
+
+TICEVAL2000.txt: 
+Dataset for predictions (4000 customer records). It has the same format as TICDATA2000.txt, only the target is missing. Participants are supposed to return the list of predicted targets only. All datasets are in tab delimited format. 
+The meaning of the attributes and attribute values is given below.
+
+TICTGTS2000.txt
+Targets for the evaluation set.
+
+### 3. IPUMS Census Database Data Set [link](https://archive.ics.uci.edu/ml/datasets/IPUMS+Census+Database)
+
+#### Title: IPUMS Census Database Data Set
+
+Description:
+  la general                                                                    
+Samples Selected:
+  1970 Form 2 Metro ("15%" County Group)        Regular
+  1980 1% Metro (B Sample)                      Regular
+  1990 1% Unweighted                            Regular
+File Type          : Rectangular
+Compression        : Yes
+Case Selection     : None
+  Across Variables : AND
+ 
+  variable   columns len 1970 1980 1990   doc
+  --------   ------- --- ---- ---- ---- ------
+  YEAR         1-  2   2   X    X    X    C-2
+  GQ           3-  3   1   X    X    X   C-75
+  GQTYPE   g   4-  4   1   X    X    X   C-77
+  FARM         5-  5   1   X    X    X   C-82
+  OWNERSHP g   6-  6   1   X    X    X   C-84
+  VALUE        7- 12   6   X    X    X   C-88
+  RENT        13- 16   4   X    X    X  C-106
+  FTOTINC     17- 22   6   X    X    X  C-118
+  NFAMS       23- 24   2   X    X    X  C-176
+  NCOUPLES    25- 25   1   X    X    X  C-178
+  NMOTHERS    26- 26   1   X    X    X  C-179
+  NFATHERS    27- 27   1   X    X    X  C-180
+  MOMLOC      28- 29   2   X    X    X    D-8
+  STEPMOM     30- 30   1   X    X    X    D-9
+  MOMRULE     31- 31   1   X    X    X   D-10
+  POPLOC      32- 33   2   X    X    X   D-12
+  STEPPOP     34- 34   1   X    X    X   D-13
+  POPRULE     35- 35   1   X    X    X   D-14
+  SPLOC       36- 37   2   X    X    X   D-16
+  SPRULE      38- 38   1   X    X    X   D-17
+  FAMSIZE     39- 40   2   X    X    X   D-19
+  NCHILD      41- 41   1   X    X    X   D-21
+  NCHLT5      42- 42   1   X    X    X   D-22
+  FAMUNIT     43- 44   2   X    X    X   D-23
+  ELDCH       45- 46   2   X    X    X   D-25
+  YNGCH       47- 48   2   X    X    X   D-25
+  NSIBS       49- 49   1   X    X    X   D-26
+  RELATE   g  50- 51   2   X    X    X   D-27
+  AGE         52- 54   3   X    X    X   D-34
+  SEX         55- 55   1   X    X    X   D-38
+  RACE     g  56- 56   1   X    X    X   D-39
+  MARST       57- 57   1   X    X    X   D-44
+  CHBORN      58- 59   2   X    X    X   D-53
+  BPL      g  60- 62   3   X    X    X   D-57
+  SCHOOL      63- 63   1  F2    X    X  D-166
+  EDUCREC     64- 64   1   X    X    X  D-169
+  SCHLTYPE    65- 65   1  F2    X    X  D-178
+  EMPSTAT  g  66- 66   1   X    X    X  D-181
+  LABFORCE    67- 67   1   X    X    X  D-181
+  OCC1950     68- 70   3   X    X    X  D-187
+  OCCSCORE    71- 72   2   X    X    X  D-200
+  SEI         73- 74   2   X    X    X  D-201
+  IND1950     75- 77   3   X    X    X  D-203
+  CLASSWKR g  78- 78   1   X    X    X  D-211
+  WKSWORK2    79- 79   1   X    X    X  D-217
+  HRSWORK2    80- 80   1   X    X    X  D-219
+  YRLASTWK    81- 82   2   X    X    X  D-225
+  WORKEDYR    83- 83   1   X    X    X  D-232
+  INCTOT      84- 89   6   X    X    X  D-238
+  INCWAGE     90- 95   6   X    X    X  D-239
+  INCBUS      96-101   6   X    X    X  D-241
+  INCFARM    102-107   6   X    X    X  D-242
+  INCSS      108-112   5   X    X    X  D-244
+  INCWELFR   113-117   5   X    X    X  D-245
+  INCOTHER   118-122   5   X    X    X  D-248
+  POVERTY    123-125   3   X    X    X  D-251
+  MIGRATE5 g 126-126   1  F2    X    X  D-256
+  MIGPLAC5   127-129   3   X    X    X  D-262
+  MOVEDIN    130-130   1  F2    X    X  D-293
+  VETSTAT    131-131   1  F2    X    X  D-315
+  TRANWORK   132-133   2  F2    X    X  D-341
+ 
+  Variable Availability Key
+  -------- ------------ ----
+  All Years  X - available in this sample
+  All Years  . - not available in this sample
+  1970      F1 - available in the Form 1 samples (5%)
+  1970      F2 - available in the Form 2 samples (15%)
+  1970       S - available in the state samples
+  1970       M - available in the metro samples (county group)
+  1970       N - available in the neighborhood samples
+  1980       S - available in the state sample ("A" or 5% state)
+  1980       M - available in the metro sample ("B" or 1% county group)
+  1980      UR - available in the urban/rural sample ("C" or 1% urban/rural)
+  1990       S - available in the state sample
+  1990       M - available in the metro sample
+  1990       E - available in the elderly sample
+ 
+Case Selections:
+None
+H STATEFIP 06         California                                        
+H METAREA  4480       Los Angeles-Long Beach, CA                    
+
+
+## Methods 
+
+```{r,results='hide',warning=FALSE,message=FALSE}
+library(MASS)
+library(FSelectorRcpp)
+library(mRMRe)
+library("praznik")
+library(mice)
+```
+
+### ReliefF
+
+#### [Amazing Article on thorough review of RelieF](https://www-sciencedirect-com.proxy.library.uu.nl/science/article/pii/S1532046418301400)
+
+#### Authors of the paper created a package [(to be found here)](https://mi2-warsaw.github.io/FSelectorRcpp/reference/index.html) called "FSelectorRcpp"
+
+Guys from Poland did it haha 
+
+The package allows for:
+
+  *   RReliefF filter `relief()`
+  
+  *   Entropy-based Filters `information_gain()`
+  
+#### An Example
+
+##### Data Preparation
+```{r}
+data<-Boston
+
+insert_nas <- function(x) {
+  len <- length(x)
+  n <- sample(1:floor(0.2*len), 1)
+  i <- sample(1:len, n)
+  x[i] <- NA 
+  x
+}
+df2 <- as.data.frame(sapply(data, insert_nas))
+
+```
+
+##### Builf ReliefF iterative function
+```{r}
+#function for relief
+#df is the matrix with names
+# the rest is coming from relief() and cut_attrs()
+#k is the number of features to chose 
+reliefF_feature_selector<-function(df,neighboursCount=5,sampleSize=5,k=5){
+  df2<-df
+  matrix_output<-matrix(rep(0,ncol(df2)^2),byrow = T, ncol=ncol(df2))
+  colnames(matrix_output)<-colnames(df2)
+  row.names(matrix_output)<-colnames(df2)
+  
+  for(i in names(df2)){
+  f <- to_formula(names(df2)[-which(names(df2)==i)], i)
+  x<-relief(f,data = df2, neighboursCount = 5, sampleSize = 5)
+  chosen<-cut_attrs(x,k=5)
+  matrix_output[i,chosen]<-1
+  }
+  return(matrix_output)
+}
+#a trail 
+reliefF_feature_selector(df2)
+
+```
+##### Compare to `quickpred()` function
+```{r}
+quickpred(df2,mincor = 0.2)
+```
+### Maximum Relevance — Minimum Redundancy “MRMR”   
+
+#### An article explaining the concept can be found here [link](https://towardsdatascience.com/mrmr-explained-exactly-how-you-wished-someone-explained-to-you-9cf4ed27458b)
+
+#### How funny it is that, that the package `mRMRe` [here](https://github.com/bhklab/mRMRe) has been published last year and manual is from Oct 2022 hahah. The package allows for the use of a lot different embedded methods as well (with MRMR). One minus is that it's documentation is confusing and I'm not sure how to use it. 
+
+#### The paper about the package can be [found here](https://academic-oup-com.proxy.library.uu.nl/bioinformatics/article/29/18/2365/239921).
+
+##### Here as a showcase I used code from manual
+```{r}
+#this is taken from manual:
+showClass("mRMRe.Filter")
+set.thread.count(2)
+## load data
+data(cgps)
+## build an mRMRe.Data object
+ge <- mRMR.data(data = data.frame(cgps.ge[ , 1:100, drop=FALSE]))
+## perform a classic (single) mRMR to select the 10 genes the most correlated with
+## the first gene but the less correlated between each other
+exect <- system.time(fs <- new("mRMRe.Filter", data = ge, target_indices = 1,
+levels = c(8, 1, 1, 1, 1)))
+print(exect)
+## print the index of the selected features for each distinct mRMR solutions
+print(solutions(fs)[[1]])
+## print the names of the selected features for each distinct mRMR solutions
+print(apply(solutions(fs)[[1]], 2, function(x, y) { return(y[x]) }, y=featureNames(ge)))
+```
+
+#### There is also `praznik` package [link here](https://gitlab.com/mbq/praznik) but it doesn't take non-disrete outcomes
+```{r}
+
+#example from 
+data(MadelonD)
+MRMR(MadelonD$X,MadelonD$Y,20)
+
+```
+#### Lastly I used the python algorithm presented in medium algorithm for feature selection using simple "MRMR" filter algorithm.
+```{python}
+import pandas as pd
+from sklearn.feature_selection import f_regression
+# inputs:
+#    X: pandas.DataFrame, features
+#    y: pandas.Series, target variable
+#    K: number of features to select
+
+K=5
+df = pd.read_csv('C:/Users/ola/OneDrive - Universiteit Utrecht/Documents/feature.selector/Methods overview/boston.csv', sep = ',')
+
+y=df.crim
+X=df.iloc[:,1:14]
+
+# compute F-statistics and initialize correlation matrix
+F = pd.Series(f_regression(X, y)[0], index = X.columns)
+corr = pd.DataFrame(.00001, index = X.columns, columns = X.columns)
+
+# initialize list of selected features and list of excluded features
+selected = []
+not_selected = X.columns.to_list()
+
+# repeat K times
+for i in range(K):
+  
+    # compute (absolute) correlations between the last selected feature and all the (currently) excluded features
+    if i > 0:
+        last_selected = selected[-1]
+        corr.loc[not_selected, last_selected] = X[not_selected].corrwith(X[last_selected]).abs().clip(.00001)
+        
+    # compute FCQ score for all the (currently) excluded features (this is Formula 2)
+    score = F.loc[not_selected] / corr.loc[not_selected, selected].mean(axis = 1).fillna(.00001)
+    
+    # find best feature, add it to selected and remove it from not_selected
+    best = score.index[score.argmax()]
+    selected.append(best)
+    not_selected.remove(best)
+    
+print(selected)  
+```
+The output are the features chosen by the algorithm. 
+
+
+  
+  
+  
