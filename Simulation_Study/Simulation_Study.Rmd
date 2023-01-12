@@ -46,3 +46,26 @@ kableExtra::kable(tibble(Outcome, Noise), booktabs = T) %>%
 
 ```
 
+
+# Introduce Missingness to a Dataset
+
+```{r load-data}
+# Boston dataset from MASS
+data <- MASS::Boston
+```
+
+```{r create-missingness}
+# for loop to create missing data in any dataset (50% missingness)
+set.seed(42)
+
+miss <- list()
+
+for (variable in 1:ncol(data)) {
+  miss[[variable]] <- sample(nrow(data), 0.5*nrow(data))
+  data[miss[[variable]], variable] <- NA
+}
+
+# check if it worked
+paste("The missing value proportion:", 
+      sum(is.na(data$lstat)) / nrow(data)) # prop of missing values
+```
