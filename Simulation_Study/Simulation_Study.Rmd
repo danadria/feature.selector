@@ -46,6 +46,16 @@ kableExtra::kable(tibble(Outcome, Noise), booktabs = T) %>%
 
 ```
 
+# Simulate Data (True Data-Generating Mechanism)
+
+The dataset used for this simulation study has several purposes:
+
+* pick best 1) filter, 2) wrapper, and 3) hybrid feature selection method
+based on their performance on this dataset
+
+*
+
+
 
 # Introduce Missingness to a Dataset
 
