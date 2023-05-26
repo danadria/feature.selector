@@ -1,0 +1,82 @@
+---
+title: "Simulation May - Onwards"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Predictor Selection Function 
+
+* create a function that mimics quickpred with a filter/wrapper/hybrid approach to feature selection
+
+
+# Simulate Data
+
+* generate a single mvrnorm distribution with N = 10K and p = 10 which consists of:
+  - Set 1: 5 predictors have rho of .5
+  - Set 2: 5 predictors have rho of 0
+
+
+```{r}
+library(MASS) # for mvrnorm
+
+N <- 10000  # number of observations
+p <- 5     # number of predictors
+
+# Set 1: Correlated predictors (r = 0.5)
+cor_matrix1 <- matrix(0.5, nrow = p, ncol = p) # create correlation matrix
+diag(cor_matrix1) <- 1  # set diagonal elements to 1
+
+# Set 2: Uncorrelated predictors (r = 0)
+cor_matrix2 <- matrix(0, nrow = p, ncol = p) # create correlation matrix
+diag(cor_matrix2) <- 1  # Set diagonal elements to 1
+
+# Generate multivariate normal data
+set.seed(7)
+set1 <- mvrnorm(N, rep(0, p), cor_matrix1) # N, mean vector, covariance matrix
+set2 <- mvrnorm(N, rep(0, p), cor_matrix2) # N, mean vector, covariance matrix
+
+# Combine both sets
+data <- cbind(set1, set2)
+
+```
+
+## Inspect the Simulated Data
+
+```{r}
+# View the first few rows of the generated data
+head(data)
+```
+
+
+
+
+```{r}
+round(cor(set1),1) # correlate features within set 1
+```
+
+```{r}
+round(cor(set2),0)
+```
+
+```{r}
+round(cor(data),1)
+```
+
+```{r}
+dim(data)
+```
+
+```{r}
+mvrnorm(N, rep(0, p), cor_matrix1)
+```
+
+
+# Induce Missingness 
+
+* Make the simulated data incomplete 50% MCAR
+* Do this nsim times
+
+```{r}
+
+```
