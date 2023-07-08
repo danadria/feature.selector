@@ -5,11 +5,6 @@ output:
     df_print: paged
 ---
 
-# Predictor Selection Function 
-
-* create a function that mimics quickpred with a filter/wrapper/hybrid approach to feature selection
-
-
 # Simulate Data
 
 * generate a single mvrnorm distribution with N = 10K and p = 10 which consists of:
@@ -48,34 +43,106 @@ data <- cbind(set1, set2)
 head(data)
 ```
 
-
-
-
 ```{r}
-round(cor(set1),1) # correlate features within set 1
+# round(cor(set1),1) # correlate features within set 1
 ```
 
 ```{r}
-round(cor(set2),0)
+# round(cor(set2),0)
 ```
 
 ```{r}
 round(cor(data),1)
 ```
 
-```{r}
-dim(data)
-```
-
-```{r}
-mvrnorm(N, rep(0, p), cor_matrix1)
-```
-
-
 # Induce Missingness 
 
 * Make the simulated data incomplete 50% MCAR
 * Do this nsim times
+
+Section adapted from https://www.gerkovink.com/simulate/
+
+```{r, warning=F}
+library(mice)
+```
+DO this nsim times, set single seed, nsim = 1000
+```{r}
+set.seed(66)
+
+nsim = 1000
+
+datasets <- list()
+
+for (i in 1:nsim){
+
+data_amp <- data |> ampute(prop = .5, mech = "MCAR")
+
+datasets[[i]] <- data_amp$amp
+ 
+}
+
+```
+
+```{r}
+# colSums(is.na(data_amp$amp))/nrow(data) # this is good
+```
+
+# Predictor Selection Functions
+
+* create a function that mimics quickpred with a filter/wrapper/hybrid approach to feature selection
+* benchmark performance and speed
+
+
+## Filter
+
+* Minimal Redundancy Maximal Relevance (mRMR)
+
+-> the implementation works only with factors/categorical variables
+-> is this relevant for mice? 
+
+```{r}
+library(praznik)
+# minimum redundancy maximal relevancy filter
+praznik::MRMR()
+```
+
+```{r}
+library(mRMRe)
+
+```
+
+
+### RReliefF filter
+
+```{r}
+install.packages("FSelector")
+```
+
+```{r}
+library(FSelector)
+```
+
+```{r}
+library(FSelector)
+#
+FSelector::relief
+```
+
+```{r}
+library(remotes)
+install_github("larskotthoff/fselector")
+```
+
+
+
+
+## Wrapper
+
+```{r}
+
+```
+
+## Hybrid
 
 ```{r}
 
